@@ -3,11 +3,14 @@ var app = express()
 var cors = require('cors')
 var logger = require('morgan')
 var mongoose = require('mongoose')
+var router = express.Router();
 
-// var corsOptions = {
-//     origin : 'http://localhost:3000',
-//     creadentials: true
-// }
+app.set('case sensitive routing', true);
+
+app.use('/static', express.static(__dirname + '/public'));
+app.use(cors())
+app.use(express.json())
+app.use(logger('tiny')) // Logger 설정
 
 const CONNECT_URL = 'mongodb://localhost:27017/book'
  mongoose.connect(CONNECT_URL, { // Mongo DB 서버 연결 
@@ -16,7 +19,7 @@ const CONNECT_URL = 'mongodb://localhost:27017/book'
 }).then(() => console.log("mongodb connected ...")) 
   .catch(e => console.log(`failed to connect mongodb: ${e}`))
 
-// app.use(cors(corsOptions))
+module.exports = router;
 app.use(express.json())
 app.use(logger('tiny'))
 
