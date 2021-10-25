@@ -21,7 +21,7 @@ BookRouter.post('/',(req, res)=>{
         if(!book){
             const newBook = new Book(req.body);
             await newBook.save().then( ()=>{
-                res.json({status:201, msg:'new book created in db!', newBook})
+                res.json({status:201, msg:'new book  created in db!', newBook})
             })
         }else{
             const msg = 'this book already exists in db !'
@@ -45,4 +45,4 @@ BookRouter.delete('/:id',(req, res)=>{
     })
 })
 
-module.exports = BookRouter;
+module.exports = BookRouter;  
